@@ -3,7 +3,8 @@ import random
 import time
 from tqdm import tqdm
 
-# Paso 1: Generar 50 números aleatorios únicos entre 1 y 100 millones
+
+# Generar 50 números aleatorios únicos entre 1 y 100 millones
 print("Generando 50 números aleatorios únicos...")
 numeros_aleatorios = random.sample(range(1, 100_000_001), 50)
 

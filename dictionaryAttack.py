@@ -15,7 +15,7 @@ hashes_robados = {
     "cc26507d9409ba52a19930045e604bf54d1d2e63b01b1e56dabedfe2f8a67123"
 }
 
-# Cargar lista de contraseñas comunes desde Lista Contraseñas.txt
+# Cargar lista de contraseñas comunes desde Lista Contraseñas.txt (archivo adjunto en la tarea de clase)
 with open("Lista Contraseñas.txt", "r", encoding="latin-1", errors="ignore") as f:
     listaContraseñas= f.read()
 
@@ -28,13 +28,16 @@ with open("Lista Contraseñas.txt", "r", encoding="latin-1", errors="ignore") as
     total_combinaciones = len(contraseñas_comunes) * (2025 - 1995 + 1)
     contador = 0
 
-print(f"🔍 Iniciando prueba de {total_combinaciones} combinaciones...\n")
+print(f"Iniciando prueba de {total_combinaciones} combinaciones...\n")
 
 # Generar combinaciones y verificar
 for base in contraseñas_comunes:
     for año in range(1995, 2026):
         combinacion = f"{base}{año}*"
+        
+        # Generar el hash SHA-256 de la combinación
         hash_generado = hashlib.sha256(combinacion.encode()).hexdigest()
+        
         contador += 1
 
         
