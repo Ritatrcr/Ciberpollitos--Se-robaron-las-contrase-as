@@ -16,16 +16,16 @@ hashes_robados = {
 }
 
 # Cargar lista de contraseñas comunes desde passwordsList.txt
-with open("passwordsList.txt", "r", encoding="latin-1") as f:
-    contraseñas_comunes = [line.strip() for line in f.readlines()]
+with open("ListaContraseñas.txt", "r", encoding="latin-1", errors="ignore") as f:
+    listaContraseñas= f.read()
 
-# Cargar archivo completo rockyou.txt
-with open("rockyou.txt", "r", encoding="latin-1", errors="ignore") as f:
-    rockyou = [line.strip() for line in f]
+    # Lee y limpia correctamente las contraseñas
+    contraseñas_comunes = [pw.strip().strip('"').strip("'") for pw in listaContraseñas.split(",")]
+    print(f"Se han cargado {len(contraseñas_comunes)} contraseñas comunes desde 'ListaContraseñas.txt'.\n")
 
-# Total de combinaciones por probar
-total_combinaciones = len(contraseñas_comunes) * (2025 - 1995 + 1)
-contador = 0
+    # Total de combinaciones por probar
+    total_combinaciones = len(contraseñas_comunes) * (2025 - 1995 + 1)
+    contador = 0
 
 print(f"🔍 Iniciando prueba de {total_combinaciones} combinaciones...\n")
 
@@ -44,7 +44,7 @@ for base in contraseñas_comunes:
         # Si el hash coincide
         if hash_generado in hashes_robados:
             try:
-                posicion_rockyou = rockyou.index(base) + 1
+                posicion_rockyou = contraseñas_comunes.index(base) + 1
             except ValueError:
                 posicion_rockyou = None
 
@@ -70,3 +70,4 @@ for base in contraseñas_comunes:
             else:
                 print("→ Posición en rockyou.txt: NO ENCONTRADA")
             print(f"→ Nivel de popularidad: {categoria}\n")
+        
