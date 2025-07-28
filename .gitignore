@@ -1,6 +1,5 @@
 # Ignora todo
 *
-
 # Pero permite los archivos Python
 !*.py
 

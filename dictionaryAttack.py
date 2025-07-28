@@ -15,13 +15,14 @@ hashes_robados = {
     "cc26507d9409ba52a19930045e604bf54d1d2e63b01b1e56dabedfe2f8a67123"
 }
 
-# Cargar lista de contraseñas comunes desde passwordsList.txt
-with open("ListaContraseñas.txt", "r", encoding="latin-1", errors="ignore") as f:
+# Cargar lista de contraseñas comunes desde Lista Contraseñas.txt
+with open("Lista Contraseñas.txt", "r", encoding="latin-1", errors="ignore") as f:
     listaContraseñas= f.read()
 
     # Lee y limpia correctamente las contraseñas
     contraseñas_comunes = [pw.strip().strip('"').strip("'") for pw in listaContraseñas.split(",")]
-    print(f"Se han cargado {len(contraseñas_comunes)} contraseñas comunes desde 'ListaContraseñas.txt'.\n")
+    print(f"🔐 {len(contraseñas_comunes)} contraseñas cargadas desde 'Lista Contraseñas.txt'.\n")
+    
 
     # Total de combinaciones por probar
     total_combinaciones = len(contraseñas_comunes) * (2025 - 1995 + 1)
@@ -36,11 +37,7 @@ for base in contraseñas_comunes:
         hash_generado = hashlib.sha256(combinacion.encode()).hexdigest()
         contador += 1
 
-        # Mostrar progreso cada 1000 combinaciones
-        if contador % 1000 == 0 or contador == total_combinaciones:
-            progreso = (contador / total_combinaciones) * 100
-            print(f"→ Progreso: {contador}/{total_combinaciones} ({progreso:.2f}%)")
-
+        
         # Si el hash coincide
         if hash_generado in hashes_robados:
             try:
@@ -50,18 +47,18 @@ for base in contraseñas_comunes:
 
             # Clasificación según posición
             if posicion_rockyou is None:
-                categoria = "❌ No encontrada en rockyou.txt"
+                categoria = "No encontrada en rockyou.txt"
             elif posicion_rockyou <= 100:
-                categoria = "🔥 Muy común (Top 100)"
+                categoria = " Muy común (Top 100)"
             elif posicion_rockyou <= 1000:
-                categoria = "✅ Común (Top 1000)"
+                categoria = "Común (Top 1000)"
             elif posicion_rockyou <= 3000:
-                categoria = "⚠️ Menos común (Top 3000)"
+                categoria = "Menos común (Top 3000)"
             else:
-                categoria = f"❌ Rara (posición {posicion_rockyou})"
+                categoria = f"Rara (posición {posicion_rockyou})"
 
             # Imprimir resultado encontrado
-            print("\n🚨 ¡Contraseña encontrada!")
+            print("¡Contraseña encontrada!")
             print(f"→ Combinación completa: {combinacion}")
             print(f"→ Hash coincidente: {hash_generado}")
             print(f"→ Contraseña base: {base}")
