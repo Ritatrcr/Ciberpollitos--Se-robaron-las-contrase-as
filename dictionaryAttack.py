@@ -16,7 +16,7 @@ hashes_robados = {
 }
 
 # Cargar lista de contraseñas comunes desde Lista Contraseñas.txt (archivo adjunto en la tarea de clase)
-with open("Lista Contraseñas.txt", "r", encoding="latin-1", errors="ignore") as f:
+with open("passwordsList.txt", "r", encoding="latin-1", errors="ignore") as f:
     listaContraseñas= f.read()
 
     # Lee y limpia correctamente las contraseñas
